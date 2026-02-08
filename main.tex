@@ -1,0 +1,293 @@
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage[margin=2.5cm]{geometry} % Márgenes
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{physics} % Muy útil para mecánica cuántica
+
+% Configuración del interlineado
+\usepackage{setspace}
+\onehalfspacing
+
+\begin{document}
+
+\begin{center}
+    \hrule \vspace{0.4cm}
+    {\huge \bfseries Fermiones de Majorana, superconductividad y \\ computación cuántica} \\[0.4cm]
+    \hrule \vspace{0.6cm}
+    
+    \noindent
+    \begin{center} \large
+        Estructura de la materia 2 \\
+        Profesor: Alberto Camjayi \\
+        Alumna: Julieta Maria Colombo \\
+        julimarilia@gmail.com\\
+        Universidad de Buenos Aires, 2do Cuatrimestre 2025
+    \end{center}
+    
+    \vspace{0.8cm}
+\end{center}
+
+Este trabajo analiza la emergencia de fermiones de Majorana (MF) en sistemas de materia condensada y su potencial aplicación en la computación cuántica topológica. A diferencia de las partículas fundamentales, en sistemas de estado sólido los Majoranas surgen como excitaciones colectivas en superconductores topológicos, caracterizándose por ser sus propias antipartículas y poseer estadística no abeliana. Se estudia el modelo unidimensional de enlace fuerte propuesto por Kitaev, demostrando cómo la ruptura de la simetría de inversión temporal y el apareamiento de onda p permiten la aparición de modos cero localizados en los extremos de la cadena. Además, se explica cómo la estadística de intercambio no abeliana de los Majoranas permite manipular la información cuántica mediante operaciones de trenzado (braiding), ofreciendo una inmunidad intrínseca frente a la decoherencia. Finalmente, se revisa una realización experimental basada en nanohilos semiconductores con fuerte acoplamiento espín-órbita y efecto Zeeman, analizando la aparición del pico de conductancia a voltaje cero (zero-bias peak) como la firma experimental principal de la presencia de modos de Majorana.
+
+\section{Introducción: ideas viejas para el futuro de la computación cuántica}
+
+En 1937 Ettore Majorana -basandose en el método y la ecuación de Dirac- propuso los fermiones de Majorana, particulas que son su propia antiparticula [1]. En altas energías existe la hipótesis de que los neutrinos podrían ser ferminones de Majorana y hay teorías de supersimetría (SUSY) que postulan que los bosones, como los fotones, tienen un \textit{superpartner} de Majorana que podría explicar la materia oscura. En materia condensada también se incorporó este concepto para sistemas de estado sólido, tanto con fines de física básica como para aplicaciones como la computación cuántica. 
+
+A diferencia del enfoque en partículas fundamentales propio de las altas energías, la materia condensada estudia las interacciones entre electrones e iones en sistemas de estado sólido. Esta condición restringe las posibles formas de encontrar fermiones de Majorana en sistemas sólidos. En los metales convencionales, las excitaciones básicas (electron-hueco) -aunque pueden aniquilarse mutuamente- portan cargas eléctricas opuestas ($-e$ y $+e$ respectivamente), por lo que no pueden ser Majoranas. En formalismo de segunda cuantización, el operador $c^{\dagger}_{\sigma}$ crea un electrón y $c_{\sigma}$ crea un hueco, siendo entidades físicas diferentes. Para tener un fermión de Majorana, el operador de creación debería ser igual a su conjugado hermítico ($\gamma^{\dagger} = \gamma$). En este sentido, el único canal posible para obtener Majoranas en sistemas sólidos es estudiando excitaciones colectivas no triviales donde puedan formarse modos de cuasipartícula cuyos operadores efectivos satisfagan la condición de autoconjugación. 
+
+La superconductividad topológica en materia condensada podría explicar estas exitaciones, donde las funciones de onda de las cuasipartículas tienen tanto un componente de electrón como de hueco. Los Fermiones de Majorana tiene la característica de ser no abelianos, es decir, que los intercambios de las partículas son operaciones no triviales que en general no conmutan (a diferencia de la estadística de intercambio de la función de onda de los bosones y fermiones que ante un intercambio tienen una fase 1 y -1 respectivamente). Además, cualquier fermión se puede escribir como superposicón de dos Majoranas, que corresponde a escribirlo como una parte real y otra imaginaria. En este trabajo, se considerarán a los majoranas separados espacialmente, sin superposición. La deslocalización protege al sistema de cualquier tipo de decoherencia, donde el sistema cuántico pierde sus propiedades debido a interacciones no deseadas con el entorno (ruido térmico, impurezas, etc). \textbf{Para que una perturbación local altere la información almacenada, tendría que afectar simultáneamente y de manera correlacionada a ambos Majoranas y es estadísticamente improbable.} Sin embargo, este estado protegido puede ser manipulado mediante operaciones topológicas —procesos cuyo efecto depende únicamente de la estructura global (topología) del movimiento- como el intercambio espacial de los fermiones de Majorana. Debido a su estadística no abeliana, el orden en que se intercambian las partículas define una operación lógica distinta sobre la información cuántica almacenada. Esta acción es intrínsecamente robusta y constituye la base de la computación cuántica topológica, un paradigma diseñado para ser inherentemente resistente a la decoherencia [3].
+
+\section{Modelo de juguete}
+
+En el contexto de la superconductividad, los pares de Cooper convencionales se forman con electrones de espines opuestos (apareamiento singlete de onda $S = 0$, función de onda con simetría esférica). Las excitaciones elementales por encima del estado superconductor se describen mediante operadores de Bogoliubov, que son combinaciones lineales de operadores de creación de electrones y aniquilación de huecos. En superconductores convencionales (de onda \textit{s}), estos operadores mezclan electrones y huecos de espín opuesto ($b \sim u c_{\uparrow}^{\dagger} + v c_{\downarrow}$). Para obtener un fermión de Majorana ($\gamma = \gamma^{\dagger}$), se necesita un apareamiento no convencional donde el operador de Bogoliubov efectivo combine electrones y huecos del \textit{mismo} espín ($\gamma = uc_{\sigma}^{\dagger}+u^{*}c_{\sigma}$). Esto se realiza en superconductores de onda $p$ (apareamiento triplete, $S=1$, simetría tipo "lóbulo") o en sistemas efectivos que simulan esta física, como semiconductores con fuerte acoplamiento espín-órbita acoplados a superconductores convencionales. El modelo que captura esto fue introducido por Kitaev [4] con una cadena unidimensional (1D) de enlace fuerte descrita por
+
+\begin{equation}
+    H_{cadena} = -\mu \sum _{i=1}^{N}n_i - \sum_{i=1}^{N-1}(tc_i^\dagger c_{i+1}+\Delta c_ic_{i+1}+h.c.)
+    \label{eq_kitaev}
+\end{equation}
+
+donde $\mu$ es el potencial químico, $c_i$ es el operador de aniquilación de los electrones en el sitio $i$, $n_i=c_i^{\dagger}c_i$ es el operador número asociado al sitio, y el parámetro t es el salto (hopping) entre sitios. La brecha superconductora $\Delta = \left| \Delta\right|e^{i\phi}$ mide la energía mínima necesaria para crear un par hueco-electrón por encima del estado fundamental superconductor. Esta cadena entra en una fase donde aparecen modos de Majorana ligados a los extremos. Esta configuración define una \textbf{fase topológica del superconductor}: una fase que, a diferencia de las fases convencionales que se caracterizan por un orden local (como la magnetización o la densidad), se distingue por la presencia robusta de estados de borde protegidos por propiedades globales del sistema.
+
+Partiendo de la \textbf{Eq.\ref{eq_kitaev}}
+
+\begin{equation}
+    H = \dots - \sum_i \left( \Delta c_i c_{i+1} + \Delta^* c_{i+1}^\dagger c_i^\dagger \right) = \dots - \sum_i |\Delta| \left( e^{i\varphi} c_i c_{i+1} + e^{-i\varphi} c_{i+1}^\dagger c_i^\dagger \right)
+    \label{eq1_kitaev}
+\end{equation}
+
+y con la transformación de gauge $c_j \rightarrow c_j e^{-i\varphi/2}$, estos términos se convierten en: 
+
+\begin{equation}
+    |\Delta| \left( c_i c_{i+1} + c_{i+1}^\dagger c_i^\dagger \right).
+\end{equation}
+
+Es decir, el hamiltoniano propuesto es invariante bajo transformaciones de gauge globales, por lo que se puede fijar la fase superconductora $\varphi = 0$ (y entonces no es una cantidad física observable). Existen excepciones como las uniones Josepshon o los vórtices en superconductores tipo II, donde la fase sí es un observable. Además se asume que tanto la brecha $\Delta$ como el salto $t$ son iguales para todos los sitios, lo que implica una cadena perfectamente periódica. 
+
+En el modelo descrito por la \textbf{Eq.~\ref{eq_kitaev}}, la simetría de inversión temporal ($t \rightarrow -t$) está explícitamente rota debido a que el hamiltoniano considera únicamente una proyección de espín —solo electrones con espín $\uparrow$ o solo con espín $\downarrow$—. Formalmente, la operación de inversión temporal $T$ actúa sobre los operadores de aniquilación intercambiando las proyecciones de espín:
+
+\begin{equation}
+T c_{\uparrow} T^{-1} = c_{\downarrow}, \qquad
+T c_{\downarrow} T^{-1} = c_{\uparrow}.
+\end{equation}
+
+Un sistema preserva la simetría de inversión temporal si su hamiltoniano conmuta con $T$, es decir, si satisface $[H, T] = 0$. En el modelo de Kitaev, sin embargo, solo aparece un tipo de operador $c_i$ (sin etiqueta de espín), que representa fermiones de una única proyección. Al aplicar $T$, se generarían términos con la proyección opuesta, los cuales no están presentes en el hamiltoniano. En consecuencia, $[H, T] \neq 0$ y la simetría está rota. Esta ruptura es esencial para permitir el apareamiento no convencional de onda $p$ y la posible emergencia de una fase topológica no trivial que trae como consecuencia estados de borde, robustez y no localidad. 
+
+En el modelo de Kitaev, cada sitio $i$ de la cadena tiene asociado un solo estado cuántico disponible. Como los electrones son fermiones idénticos, el principio de exclusión de Pauli prohíbe que dos de ellos ocupen el mismo estado cuántico. Como se mencionó anteriormente, en este modelo, los electrones se consideran efectivamente sin espín (o equivalentemente, con la misma proyección de espín fija), por lo que el estado en cada sitio queda definido únicamente por su posición. Como consecuencia, \textbf{cada sitio puede contener como máximo un electrón}; la doble ocupación está automáticamente excluida. Esta restricción reduce la dimensión del espacio de Hilbert local (por sitio solo existen los estados $|0\rangle$ y $|1\rangle$) y simplifica el análisis del problema.
+
+Además, el término $\Delta c_i c_{i+1}$ en el hamiltoniano muestra que \textbf{el apareamiento superconductor ocurre entre sitios vecinos}: un par de Cooper se forma específicamente entre un electrón en el sitio $i$ y otro en el sitio $i+1$. Este apareamiento de \textbf{corto alcance} es esencial para la topología unidimensional del modelo, ya que permite la emergencia de modos de Majorana únicamente localizados en los extremos de la cadena. 
+
+Podemos escribir la \textbf{Eq.\ref{eq_kitaev}} en término de los operadores de Majorana usando
+
+\begin{equation}
+    c_i = \frac{1}{2}(\gamma_{i,A}+i\gamma_{i,B}), \qquad c_i^\dagger = \frac{1}{2}(\gamma_{i,A}-i\gamma_{i,B})
+    \label{operadores_particula}
+\end{equation}
+
+donde $\gamma_{i,j}$ son los operadores de Majorana en el sitio i de la partícula j de la celda. Un fermión en el sitio i, se dividió en dos operadores de Majorana que viven en el sitio i como se ilustra en la \textbf{Fig.\ref{fig:majoranas}(a)}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\linewidth]{majoranas.pdf}
+    \caption{Esquema de la cadena unideimensional de enlace fuerte para superconductores de onda \textit{p}. (a) Los operadores de fermión en cada sitio $i$ de la cadena pueden dividirse en dos operadores de Majorana, $\gamma_{i,A}$ y $\gamma_{i,B}$. (b) En el límite $\mu = 0$, $t = \Delta$, el Hamiltoniano es diagonal en términos de operadores de fermión que se obtienen combinando operadores de Majorana en sitios vecinos, $\gamma_{i+1,A}$ y $\gamma_{i,B}$. Esto deja dos operadores de Majorana no emparejados, $\gamma_{1,A}$ y $\gamma_{N,B}$, que pueden combinarse para formar un operador de fermión de energía cero, altamente no local, $\tilde{c}_M$. Figura extraída de [6].}
+    \label{fig:majoranas}
+\end{figure}
+
+Invirtiendo estas ecuaciones se observa claramente que estos operadores son hermíticos: 
+
+\begin{equation}
+    \gamma_{i,A} = c_i^\dagger + c_i, \qquad \gamma_{i,B} = i(c_i^\dagger-c_i).
+\end{equation}
+
+\subsection{Entendiendo el modelo de juguete}
+
+Asumiendo $\mu=0$ y $t=\Delta$ e insertando las \textbf{Eq.\ref{operadores_particula}} en el modelo se obtiene 
+
+\begin{equation}
+    H_{cadena}=-it\sum_{i=1}^{N-1}\gamma_{i,B}\gamma_{i+1,A}
+    \label{paper_6}
+\end{equation}
+
+que es una forma alternativa de escribir el hamiltoniano diagonalizado. De manera análoga a los operadores de la \textbf{Eq.\ref{operadores_particula}} se pueden construir nuevos operadores fermiónicos 
+
+\begin{equation}
+    \tilde{c}_i = \frac{1}{2}(\gamma_{i+1,A}+i\gamma_{i,B})
+    \label{ops_fermionicos}
+\end{equation}
+
+donde cada uno está compuesto por una superposición de dos operadores de Majorana situados en sitios vecinos como se ilustra en la \textbf{Fig.\ref{fig:majoranas}(b)}. Podemos reescribir el hamiltoniano
+
+\begin{equation}
+    -i\gamma_{i,B}\gamma_{i+1,A} = 2\tilde{c}_i^\dagger\tilde{c}_i - 1 = 2\tilde{n}_i - 1 \qquad \rightarrow \qquad H_{\text{cadena}} = 2t \sum_{i=1}^{N-1} \tilde{c}_i^\dagger \tilde{c}_i
+\end{equation}
+
+donde $\tilde{n}_i$ es el operador número para el modo $\tilde{c}_i$. El costo energético de crear/aniquilar un fermión $\tilde{c}_i$ es $2t$.
+
+Lo desarrollado hasta este punto es válido para los operadores del interior de la cadena, ya que los Majorana localizados en los extremos opuestos ($\gamma_{N,B}$ y $\gamma_{1,A}$) no están considerados en la \textbf{Eq.\ref{paper_6}}. Como estos operadores anticonmutan (los operadores de Majorana cumplen el álgebra de Clifford $\{ \gamma_k, \gamma_l \} = 2\delta_{kl}$), se pueden combinar para formar un único estado fermiónico con operador
+
+\begin{equation}
+    \tilde{c}_M = \frac{1}{2} (\gamma_{N,B} + i\gamma_{1,A}).
+    \label{operador_especial}
+\end{equation}
+
+Como $\gamma_{N,B}$ y $\gamma_{1,A}$ están localizados en extremos opuestos de la cadena, es un estado altamente deslocalizado. Además, \textbf{como el operador no está acoplado en el hamiltoniano, ocupar este estado requiere energía cero.} 
+
+En el caso de un superconductor convencional (onda s) el estado fundamental es no degenerado (único estado de mínima energía), contiene solo estados con número par de electrones y cualquier excitación que cambie la paridad (crear/aniquilar un electrón individual) cuesta una energía mínima. En contraste, la cadena de Kitaev (fase topológica) admite dos estados fundamentales degenerados a energía cero, caracterizados por los autovalores $n_M = 0$ (paridad par) y $n_M = 1$ (paridad impar) del operador número $n_M = \tilde{c}_M^\dagger \tilde{c}_M$ del modo fermiónico no local.
+
+Si bien el análisis se realizó para el caso $\Delta = t$, $\mu = 0$, la existencia de modos de Majorana en los extremos es una propiedad topológica robusta que se mantiene en todo el régimen $|\mu| < 2t$ (condición: que el potencial químico se encuentre dentro de la banda de conducción). En condiciones generales, estos modos no están estrictamente confinados a los sitios extremos, sino que decaen exponencialmente hacia el interior de la cadena con una longitud característica $\xi$. Su energía permanece cercana a cero únicamente si el alambre es lo bastante largo $(L \gg \xi)$ para que la superposición entre los modos de ambos extremos sea despreciable; si la cadena es corta, el acoplamiento abre una brecha energética $\propto e^{-L/\xi}$.
+
+El hamiltoniano en el continuo de un superconductor de onda $p$ en 1D es:
+
+\begin{equation}
+H_{\text{1D}}^{pw} = \int dx \, \psi^\dagger(x) \left( -\frac{\partial_x^2}{2m} - \mu \right) \psi(x) 
+                     + \left[ \psi(x) |\Delta| e^{i\varphi} \partial_x \psi(x) + \text{h.c.} \right],
+\quad (10)
+\end{equation}
+
+donde $\psi^\dagger(x)$ es el operador de creación en el espacio real, $p = -i\hbar\partial_x$ es el operador momento, $m$ es la masa efectiva del electrón y se reintrodujo la fase superconductora $\varphi$. En el caso 1D, los Majoranas también aparecerán en puntos de transición entre regiones topológicas y no topológicas (por ejemplo, si el potencial químico o la amplitud de salto varían a lo largo del alambre y $|\mu| > 2t$ en algún segmento).
+
+\section{De Majoranas a qubits}
+
+Hasta ahora se discutió cómo los fermiones de Majorana emergen como modos cero localizados en sistemas superconductores topológicos, y cómo su naturaleza de “mitad de fermión” y no localidad los hace buenos candidatos para almacenar información cuántica de manera protegida. Sin embargo, para transformar estos objetos exóticos-físicos en qubits funcionales —las unidades básicas de procesamiento cuántico— es necesario entender dos aspectos clave: primero, las operaciones que permiten manipularlos (basadas en su estadística no abeliana y el \textit{braiding} o trenzado), y segundo, cómo codificar y leer información en ellos de forma práctica y robusta.
+
+\subsection{Para entender los qubits: Estadística no abeliana y braiding (trenzado)}
+
+Cuando se tienen dos modos de Majorana, pueden combinarse en un único fermión ordinario mediante:
+
+\begin{equation}
+f = \frac{1}{2}(\gamma_1 + i\gamma_2),
+\label{fermion}
+\end{equation}
+
+donde $f^\dagger$ y $f$ son los operadores de creación y aniquilación del fermión de Dirac. El operador número asociado es $n = f^\dagger f$, y su valor ($n = 0$ o $1$) determina la paridad total del sistema, una cantidad conservada en un superconductor aislado.
+
+En el contexto de computación cuántica, un qubit es un sistema físico de dos niveles que permite no solo representar los estados $\lvert 0 \rangle$ y $\lvert 1 \rangle$, sino también crear superposiciones coherentes de estos, como $\alpha \lvert 0 \rangle + \beta \lvert 1 \rangle$, y manipularlas mediante operaciones unitarias. Para usar fermiones de Majorana como qubits, es fundamental que el sistema admita transformaciones que conecten coherentemente estos dos estados base.
+
+Para analizar cómo se manifiestan las estadísticas no abelianas, introducimos el operador de trenzado (braid operator):
+
+\begin{equation}
+B_{ij} = \frac{1}{\sqrt{2}}(1 + \gamma_i \gamma_j),
+\end{equation}
+
+que describe el intercambio adiabático de dos fermiones de Majorana $\gamma_i$ y $\gamma_j$.
+
+Consideremos los dos posibles estados del sistema: el estado par ($n=0$) $\lvert 0 \rangle$ y el estado impar ($n=1$) $\lvert 1 \rangle$. La acción de $B_{12}$ sobre estos estados es:
+
+\begin{equation}
+B_{12} \lvert 0 \rangle = \frac{1}{\sqrt{2}}(1 + i) \lvert 0 \rangle = e^{i\theta} \lvert 0 \rangle, \qquad
+B_{12} \lvert 1 \rangle = \frac{1}{\sqrt{2}}(1 - i) \lvert 1 \rangle = e^{-i\theta} \lvert 1 \rangle,
+\end{equation}
+
+con $\theta = \pi/4$. El trenzado asigna fases opuestas a cada paridad, pero no puede cambiar el valor de $n$ ni generar superposiciones entre los estados $\lvert 0 \rangle$ y $\lvert 1 \rangle$.
+
+Esta limitación se debe a que el operador de trenzado conmuta con el operador número: $[B_{12}, n] = 0$. En consecuencia, cualquier transformación unitaria que conserve la paridad solo puede multiplicar los autoestados de $n$ por una fase global. Esto hace que el espacio de dos niveles ${\lvert 0 \rangle, \lvert 1 \rangle}$ sea inútil como qubit, ya que no se pueden crear superposiciones coherentes entre sus estados base.
+
+Así, con solo dos fermiones de Majorana, el trenzado resulta una operación abeliana, incapaz de realizar manipulaciones no triviales en el espacio de Hilbert. \textbf{Un grado de libertad que coincide con una cantidad conservada global (como la paridad) no puede usarse para realizar operaciones cuánticas útiles.}
+
+El salto conceptual ocurre al reconocer que para codificar un qubit topológico se necesita separar el grado de libertad lógico (el que se desea manipular) de la cantidad conservada global. Este objetivo se logra introduciendo al menos cuatro modos de Majorana, como se discute en la siguiente sección.
+
+\subsection{Los qubits}
+
+Para construir un qubit es necesario poder crear superposiciones coherentes entre dos estados distinguibles y realizar operaciones que los transformen de manera no trivial. Con cuatro fermiones de Majorana se pueden definir dos fermiones compuestos:
+\begin{equation}
+    f_1 = \frac{1}{2}(\gamma_1 + i\gamma_2), \qquad 
+    f_2 = \frac{1}{2}(\gamma_3 + i\gamma_4).
+\end{equation}
+La paridad total $n_1 + n_2$ se conserva (puede ser par o impar), lo que divide el espacio de cuatro estados posibles —$\lvert 00 \rangle$, $\lvert 11 \rangle$, $\lvert 01 \rangle$ y $\lvert 10 \rangle$— en dos subespacios disjuntos. Al fijar la paridad (por ejemplo, par), se obtiene un subespacio de dos estados distinguibles: $\lvert \bar{0} \rangle = \lvert 00 \rangle$ y $\lvert \bar{1} \rangle = \lvert 11 \rangle$. 
+
+Aunque la paridad global es una cantidad conservada, \textbf{las ocupaciones individuales $n_1$ y $n_2$ no lo son}. Esto permite que operaciones de trenzado que involucren Majoranas de fermiones distintos manipulen estos grados de libertad internos. Un ejemplo esencial es la acción de $B_{23}$, que intercambia $\gamma_2$ (perteneciente a $f_1$) y $\gamma_3$ (perteneciente a $f_2$):
+\begin{equation}
+    B_{23} \lvert 00 \rangle = \frac{1}{\sqrt{2}} \left( \lvert 00 \rangle + i \lvert 11 \rangle \right),
+\end{equation}
+
+generando así una superposición coherente entre los dos estados base. De este modo, el trenzado trasciende su rol de mero asignador de fases globales y se convierte en un mecanismo capaz de realizar operaciones lógicas no triviales sobre el qubit.
+
+Con cuatro Majoranas queda en evidencia la naturaleza no abeliana de las operaciones de trenzado. Mientras que dos intercambios que actúan sobre pares disjuntos de Majoranas conmutan (por ejemplo, $[B_{12}, B_{34}] = 0$, ya que intercambiar los Majoranas 1–2 no afecta el intercambio de los Majoranas 3–4), la situación cambia cuando las operaciones comparten algún Majorana. En ese caso, los operadores de trenzado dejan de conmutar, como lo expresa la relación
+
+\begin{equation}
+    [B_{i-1,i}, B_{i,i+1}] = \gamma_{i-1} \gamma_{i+1} \neq 0,
+\end{equation}
+
+la cual revela que el orden en que se realizan los intercambios sí importa. Esta no conmutatividad —la estadística no abeliana— es precisamente lo que permite que secuencias específicas de trenzados ejecuten rotaciones no triviales en el espacio de estados del qubit. Así, \textbf{mientras que con dos Majoranas el trenzado solo produce fases globales (un comportamiento abeliano trivial), con cuatro o más el trenzado se convierte en una herramienta para manipular la información cuántica de forma topológicamente protegida.}
+
+Si bien el braiding de cuatro Majoranas permite manipular un qubit topológico realizando rotaciones básicas como si fuera una esfera de Bloch; estas operaciones por sí solas no alcanzan para construir una computadora cuántica universal. El problema radica en que el braiding solo puede generar un subconjunto muy limitado de todas las transformaciones posibles en el espacio de estados. En particular, no es posible implementar una puerta (transformacíon que cambia de estado) de dos qubits utilizando únicamente intercambios topológicos protegidos. Para lograr la universalidad, es necesario complementar el braiding con operaciones no topológicas (más susceptibles al ruido) o diseñar arquitecturas híbridas que combinen qubits de Majorana con otros sistemas cuánticos más versátiles. Esta dualidad —protección topológica versus operatividad universal— define uno de los grandes desafíos en el camino hacia un procesador cuántico escalable basado en Majoranas.
+
+\section{¿Evidencias experimentales?}
+
+Una manera de realizar superconductividad topológica en la práctica es mediante un nanohilo unidimensional (1D nanowire) con fuerte acoplamiento spin-órbita, acoplado en proximidad a un superconductor de onda s y sometido a un cambo magnético externo. Este campo introduce un acoplamiento Zeeman, que separa en energía los estados de espín opuesto mediante
+
+\begin{equation}
+    H_{zeeman}=\frac{1}{2} g \mu_B \mathbf{B} \cdot \boldsymbol{\sigma}
+\end{equation}
+
+en el hamiltoniano, donde $\mu_B$ es el magnetón de Bohr, B es el campo externo aplicado, $\sigma$ son las matrices de Pauli y $g$ es el factor de Landé. 
+
+Si el campo magnético es suficientemente fuerte, rompe la degeneración de spin en el punto $k = 0$, es decir, los dos estados de spin que antes tenían igual energía se separan y aparece un gap en el cruce de bandas. Esto deja al sistema con una única banda disponible cerca del nivel de Fermi, lo que equivale a un régimen efectivamente \textit{spinless}. Esta condición es esencial para que el sistema pueda albergar modos de Majorana en sus extremos. Para que esto ocurra, el campo Zeeman debe superar un umbral crítico dado por 
+
+\begin{equation}
+    B_c = \sqrt{\Delta^2 + \mu^2}, 
+\end{equation}
+
+donde $\Delta$ es el gap superconductor inducido y $\mu$ el potencial químico. 
+
+En la \textbf{Fig.\ref{fig:esquema}} se observa un diseño típico de estos dispositivos: un nanohilo semiconductor (InAs o InSb) recubierto parcialmente por un superconductor (Al o Nb), y sobre una serie de compuertas electrostáticas que controlan el potencial químico en distintas regiones del hilo. Bajo campo magnético adecuado, y con la densidad electrónica sintonizada mediante las compuertas, el sistema puede alcanzar la fase topológica deseada donde emergen modos de Majorana en los extremos del hilo con función de onda que decae hacia el interior.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.4\linewidth]{setup.pdf}
+    \caption{Esquema de dispositivo para inducir superconductividad topológica en un nanohilo 1D. El nanohilo está en contacto con un superconductor. Las compuertas ($V_{g1}$–$V_{g4}$) controlan el potencial químico. Bajo ciertas condiciones, emergen modos de Majorana ($\gamma_1$, $\gamma_2$) en los extremos del hilo. Figura extraída de [6].}
+    \label{fig:esquema}
+\end{figure}
+
+La \textbf{Fig.\ref{fig:bandas}} muestra el diagrama de bandas $E(k_x)$ de un nanohilo con acoplamiento spin–órbita bajo distintas condiciones. El vector de onda $k_x$ corresponde al momento en la dirección longitudinal del nanohilo. En (a), sin campo magnético, las dos bandas parabólicas están desplazadas por el acoplamiento spin–órbita, pero aún son degeneradas en $k = 0$. En (b), al agregar un campo magnético, Zeeman rompe esta degeneración y abre un gap en el cruce, dando lugar al régimen spinless. A medida que el campo aumenta (c), esta separación se amplía y los espines se alinean con el campo. Finalmente, en (d), se introduce superconductividad inducida ($\Delta > 0$), abriendo una brecha superconductora sobre la banda inferior. Si el campo cumple $B > B_c$, el sistema entra en la fase topológica y se espera la aparición de modos de Majorana en los extremos.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.95\linewidth]{banda.pdf}
+    \caption{Evolución del espectro de bandas $E(k_x)$ en un nanohilo con acoplamiento spin–órbita bajo la influencia de un campo magnético $B$ y superconductividad inducida.
+    (a) Sin campo: bandas desplazadas por el acoplamiento spin–órbita.
+    (b) Campo pequeño: apertura de un gap en $k = 0$.
+    (c) Campo mayor: régimen efectivamente spinless.
+    (d) Inclusión de superconductividad inducida: se abre un gap superconductor que permite la aparición de modos de Majorana si se alcanza la fase topológica. Figura extraída de [6].}
+    \label{fig:bandas}
+\end{figure}
+
+Una posible observación experimental de los modos de Majorana es la aparición de un pico de conductancia centrado en voltaje cero, conocido como zero-bias peak (ZBP), en medidas de espectroscopía túnel. En este tipo de experimentos, se coloca un contacto metálico normal en un extremo del nanohilo y se mide la conductancia $dI/dV$ al variar el voltaje de polarización $V$. Si hay un modo de Majorana de energía cero, se espera una resonancia exactamente en $E = 0$, que se manifiesta como un pico en $dI/dV$ cuando $V = 0$, lo que sería una posible presencia de Majoranas. Por el contrario, i no hay nada en el sistema, la conductancia es suave o nula en $V = 0$. Esta resonancia ocurre porque el modo de Majorana de energía cero permite que un electrón del contacto normal pueda tunelear hacia el sistema sin gastar energía.
+
+Por ejemplo, Mourik et al. (2012) implementaron este diseño usando un nanohilo de InSb en contacto con un superconductor de Al, y observaron un ZBP emergente al aumentar el campo magnético más allá de cierto umbral como se obserba en la \textbf{Fig.\ref{fig:mourik}}. El pico permanecía centrado en $V = 0$ sobre un amplio rango de parámetros, y desaparecía si se desconectaba el superconductor o se alteraban las condiciones del sistema. Estas observaciones fueron interpretadas como indicios consistentes con un modo de Majorana localizado en el extremo del hilo [5].
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Mourik.jpeg}
+    \caption{(A) Conductancia diferencial $dI/dV$ en función del voltaje $V$, medida a 70 mK para diferentes valores del campo magnético $B$ (de 0 a 490 mT en pasos de 10 mT; las curvas están desplazadas verticalmente para mayor claridad, excepto la traza más baja correspondiente a $B = 0$). 
+    (B) Mapa de color de $dI/dV$ en función de $V$ y $B$. El zero-bias peak (ZBP) está resaltado con un óvalo punteado. Figura extraída de [5].}
+    \label{fig:mourik}
+\end{figure}
+
+Se han realizado varios experimentos que no constituyen aún una prueba definitiva, ya que existen mecanismos alternativos que pueden producir señales similares. Sin embargo, son consistentes con las predicciones teóricas para modos de Majorana y representan un avance significativo hacia su detección y control en sistemas de materia condensada. 
+
+\section{Conclusiones y perspectivas}
+
+En este trabajo se ha presentado una introducción a la física de los fermiones de Majorana en la materia condensada, explorando cómo estas partículas, que son sus propias antipartículas, emergen como excitaciones de energía cero en superconductores topológicos. A través del modelo de la cadena de Kitaev y su implementación práctica en nanohilos semiconductores, hemos visto que la combinación de acoplamiento espín-órbita, campos magnéticos y superconductividad inducida permite la aparición de estados ligados de Majorana, cuya firma experimental principal es el pico de conductancia a voltaje cero (zero-bias peak).
+
+Si bien estas observaciones experimentales sugieren que la realización de los fermiones de Majorana está \textit{cerca}, el desafío inmediato para la comunidad científica es perfeccionar las técnicas de fabricación y medición para confirmar que estas observaciones son avistamientos genuinos de Majorana y distinguirlos definitivamente de otros mecanismos físicos que pueden imitar estas señales.
+
+Una vez que estos modos puedan generarse y detectarse de manera reproducible, el objetivo reside en demostrar la capacidad de controlar y manipular la información cuántica almacenada en estos sistemas. La naturaleza no local de los estados de Majorana ofrece una inmunidad intrínseca contra la decoherencia, resolviendo uno de los mayores obstáculos de la computación cuántica actual [6].
+
+El futuro de este campo apunta hacia la validación experimental de la estadística de intercambio no abeliana mediante operaciones de trenzado (braiding). Aunque el trenzado por sí solo no permite una computación cuántica universal y requerirá operaciones auxiliares, la robustez topológica de estos qubits ofrece umbrales de error inferiores a los de las arquitecturas convencionales. En definitiva, el dominio de la física de los fermiones de Majorana podría representar la pieza fundamental para el futuro del procesamiento de información cuántica escalable y tolerante a fallos.
+
+\section{Referencias}
+
+[1] E. Majorana, “Teoria simmetrica dell’elettrone e del positrone,” Il Nuovo Cimento 14, 171 (1937).
+
+[2] J. Alicea, “New directions in the pursuit of Majorana fermions in solid state systems,” Rep. Prog. Phys. 75, 076501 (2012).
+
+[3] C. Nayak, S. H. Simon, A. Stern, M. Freedman, and S. Das Sarma, “Non-Abelian anyons and topological quantum computation,” Rev. Mod. Phys. 80, 1083 (2008).
+
+[4] A. Y. Kitaev, “Unpaired Majorana fermions in quantum wires,” Physics-Uspekhi 44, 131 (2001).
+
+[5] V. Mourik, K. Zuo, S. M. Frolov, S. R. Plissard, E. P. A. M. Bakkers, and L. P. Kouwenhoven, “Signatures of Majorana Fermions in Hybrid Superconductor–Semiconductor Nanowire Devices,” Science 336, 1003 (2012).
+
+[6] M. Leijnse and K. Flensberg, “Introduction to topological superconductivity and Majorana fermions,” Semicond. Sci. Technol. 27, 124003 (2012).
+
+\end{document}
